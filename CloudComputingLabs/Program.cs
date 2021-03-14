@@ -22,7 +22,6 @@ namespace CloudComputingLabs
 
         static void ExecuteLab2()
         {
-            //ввод: ["aaa", "b", "b", "aa"], вывод: [ ["aaa", 3], ["b", 1] ]
             var lab2 = new Lab2();
             var array = new [] {"aaaaaaa", "bbb", "b", "b", "aaa", "ccccccccc", "aaaaaaaaaa", "qqqqqqqqqqqqqqqqq", "q"};
 
