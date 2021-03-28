@@ -8,6 +8,7 @@ namespace CloudComputingLabs
         {
             ExecuteLab1();
             ExecuteLab2();
+            ExecuteLab3();
         }
 
         static void ExecuteLab1()
@@ -31,6 +32,25 @@ namespace CloudComputingLabs
             {
                 Console.Write($"\"{s}\", ");
             }
+        }
+
+        static void ExecuteLab3()
+        {
+            var eventsRepository = new EventsRepository();
+            var eventBus = new EventBus();
+
+            eventBus.Subscribe(eventsRepository, "First event",
+                () => { Console.WriteLine("First event is executing."); });
+            var eventActionId = eventBus.Subscribe(eventsRepository, "First event",
+                () => { Console.WriteLine("Still running..."); });
+            eventBus.Subscribe(eventsRepository, "Second event",
+                () => { Console.WriteLine("Second event is executing."); });
+            
+            eventBus.ExecuteEvent(eventsRepository, "First event");
+            
+            eventBus.Unsubscribe(eventsRepository, "First event", eventActionId);
+            
+            eventBus.ExecuteAll(eventsRepository);
         }
     }
 }
